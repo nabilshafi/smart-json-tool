@@ -1,6 +1,6 @@
 'use client';
 import { useState } from "react";
-import { Controlled as CodeMirror } from "react-codemirror2";
+import CodeMirror from "@uiw/react-codemirror";
 import "codemirror/lib/codemirror.css";
 import "codemirror/mode/javascript/javascript";
 import "codemirror/theme/material.css";
@@ -45,11 +45,8 @@ export default function Home() {
             theme: "material",
             lineNumbers: true,
           }}
-          onBeforeChange={(editor, data, value) => {
+          onChange={(editor, data, value) => {
             setInput(value);
-          }}
-          editorDidMount={(editor) => {
-            editor.setSize(null, 150);
           }}
         />
         {errorLine && (
