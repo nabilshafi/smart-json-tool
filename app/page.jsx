@@ -1,9 +1,11 @@
 'use client';
 import { useState } from "react";
-import CodeMirror from "@uiw/react-codemirror";
+import dynamic from "next/dynamic";
 import "codemirror/lib/codemirror.css";
 import "codemirror/mode/javascript/javascript";
 import "codemirror/theme/material.css";
+
+const CodeMirror = dynamic(() => import("@uiw/react-codemirror"), { ssr: false });
 
 export default function Home() {
   const [input, setInput] = useState("");
