@@ -63,21 +63,18 @@ export default function Home() {
 
         {/* Input Area */}
         <div>
-          <div className="h-96 border rounded overflow-hidden flex flex-col">
-            <div className="flex-1">
-              <CodeMirror
-                value={input}
-                options={{
-                  mode: "application/json",
-                  theme: "material",
-                  lineNumbers: true,
-                }}
-                onChange={(editor, data, value) => {
-                  setInput(value);
-                }}
-              />
-            </div>
-          </div>
+          <CodeMirror
+            style={{ height: "384px" }} // Explicit fixed height to show ~10 lines
+            value={input}
+            options={{
+              mode: "application/json",
+              theme: "material",
+              lineNumbers: true,
+            }}
+            onChange={(editor, data, value) => {
+              setInput(value);
+            }}
+          />
           {errorLine && (
             <p className="text-red-600 mt-2">Syntax error near line {errorLine}</p>
           )}
