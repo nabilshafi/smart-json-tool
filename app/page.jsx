@@ -8,12 +8,19 @@ export default function Home() {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [errorLine, setErrorLine] = useState(null);
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
     import("codemirror/lib/codemirror.css");
     import("codemirror/mode/javascript/javascript");
     import("codemirror/theme/material.css");
-  }, []);
+
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkMode]);
 
   const formatJSON = async () => {
     setErrorLine(null);
@@ -40,26 +47,58 @@ export default function Home() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-white p-6 rounded-2xl shadow">
-      <h1 className="text-2xl font-bold mb-4">Smart JSON Formatter</h1>
-      <div className="mb-4">
-        <CodeMirror
-          value={input}
-          options={{
-            mode: "application/json",
-            theme: "material",
-            lineNumbers: true,
-          }}
-          onChange={(editor, data, value) => {
-            setInput(value);
-          }}
-        />
-        {errorLine && (
-          <p className="text-red-600 mt-1">Syntax error near line {errorLine}</p>
-        )}
+    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 p-4 flex flex-col items-center">
+      <div className="w-full max-w-2xl bg-white dark:bg-gray-800 p-6 rounded-2xl shadow space-y-4">
+
+        {/* Header and Dark Mode Toggle */}
+        <div className="flex flex-col sm:flex-row justify-between items-center">
+          <h1 className="text-2xl font-bold mb-2 sm:mb-0 text-center sm:text-left">Smart JSON Formatter</h1>
+          <button
+            className="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition"
+            onClick={() => setDarkMode(!darkMode)}
+          >
+            {darkMode ? 'Light Mode' : 'Dark Mode'}
+          </button>
+        </div>
+
+        {/* Input Area */}
+        <div>
+          <div className="h-48 sm:h-64 md:h-80 lg:h-96 border rounded overflow-hidden">
+            <CodeMirror
+              value={input}
+              options={{
+                mode: "application/json",
+                theme: "material",
+                lineNumbers: true,
+              }}
+              onChange={(editor, data, value) => {
+                setInput(value);
+              }}
+            />
+          </div>
+          {errorLine && (
+            <p className="text-red-600 mt-2">Syntax error near line {errorLine}</p>
+          )}
+        </div>
+
+        {/* Format Button */}
+        <button
+          className="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+          onClick={formatJSON}
+        >
+          Format JSON
+        </button>
+
+        {/* Output Area */}
+        <div>
+          <textarea
+            className="w-full h-32 sm:h-40 md:h-48 lg:h-56 p-2 border rounded bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100"
+            placeholder="Formatted JSON"
+            value={output}
+            readOnly
+          />
+        </div>
       </div>
-      <button className="bg-blue-600 text-white px-4 py-2 rounded mb-4" onClick={formatJSON}>Format JSON</button>
-      <textarea className="w-full h-32 p-2 border" placeholder="Formatted JSON" value={output} readOnly />
     </div>
   );
 }
