@@ -61,10 +61,10 @@ export default function Home() {
           </button>
         </div>
 
-        {/* Input Area */}
-        <div>
+        {/* Input Area with Enhanced Border */}
+        <div className="border-2 border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden">
           <CodeMirror
-            style={{ height: "384px" }} // Explicit fixed height to show ~10 lines
+            style={{ height: "384px" }}
             value={input}
             options={{
               mode: "application/json",
@@ -75,10 +75,10 @@ export default function Home() {
               setInput(value);
             }}
           />
-          {errorLine && (
-            <p className="text-red-600 mt-2">Syntax error near line {errorLine}</p>
-          )}
         </div>
+        {errorLine && (
+          <p className="text-red-600 mt-2">Syntax error near line {errorLine}</p>
+        )}
 
         {/* Format Button */}
         <button
@@ -88,10 +88,10 @@ export default function Home() {
           Format JSON
         </button>
 
-        {/* Output Area */}
+        {/* Output Area with Enhanced Styling */}
         <div>
           <textarea
-            className="w-full h-64 p-2 border rounded bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100"
+            className="w-full h-64 border-2 border-gray-300 dark:border-gray-600 rounded-lg p-4 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
             placeholder="Formatted JSON"
             value={output}
             readOnly
