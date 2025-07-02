@@ -63,18 +63,20 @@ export default function Home() {
 
         {/* Input Area */}
         <div>
-          <div className="h-48 sm:h-64 md:h-80 lg:h-96 border rounded overflow-hidden">
-            <CodeMirror
-              value={input}
-              options={{
-                mode: "application/json",
-                theme: "material",
-                lineNumbers: true,
-              }}
-              onChange={(editor, data, value) => {
-                setInput(value);
-              }}
-            />
+          <div className="h-96 border rounded overflow-hidden flex flex-col">
+            <div className="flex-1">
+              <CodeMirror
+                value={input}
+                options={{
+                  mode: "application/json",
+                  theme: "material",
+                  lineNumbers: true,
+                }}
+                onChange={(editor, data, value) => {
+                  setInput(value);
+                }}
+              />
+            </div>
           </div>
           {errorLine && (
             <p className="text-red-600 mt-2">Syntax error near line {errorLine}</p>
@@ -92,7 +94,7 @@ export default function Home() {
         {/* Output Area */}
         <div>
           <textarea
-            className="w-full h-32 sm:h-40 md:h-48 lg:h-56 p-2 border rounded bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100"
+            className="w-full h-64 p-2 border rounded bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100"
             placeholder="Formatted JSON"
             value={output}
             readOnly
