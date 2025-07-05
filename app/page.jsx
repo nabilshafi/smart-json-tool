@@ -91,11 +91,11 @@ export default function Home() {
           Format JSON
         </button>
 
-        {/* Output Area with Enhanced Styling */}
+        {/* Output Area with Modern Styling */}
         <div>
           <textarea
-            className="w-full h-64 border-2 border-gray-300 dark:border-gray-600 rounded-lg p-4 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-            placeholder="Formatted JSON"
+            className="w-full h-64 border border-gray-300 dark:border-gray-600 rounded-lg p-4 bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none resize-y font-mono"
+            placeholder="Formatted JSON will appear here..."
             value={output}
             readOnly
           />
