@@ -5,7 +5,6 @@ import dynamic from "next/dynamic";
 const CodeMirror = dynamic(() => import("@uiw/react-codemirror"), { ssr: false });
 
 export default function Home() {
-  // Pre-fill with 10 blank lines
   const defaultEmptyLines = "\n\n\n\n\n\n\n\n\n";
   const [input, setInput] = useState(defaultEmptyLines);
   const [output, setOutput] = useState("");
@@ -49,12 +48,12 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 p-4 flex flex-col items-center">
-      <div className="w-full max-w-2xl bg-white dark:bg-gray-800 p-6 rounded-2xl shadow space-y-4">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex items-center justify-center p-4">
+      <div className="w-full max-w-3xl bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg space-y-6">
 
-        {/* Header and Dark Mode Toggle */}
+        {/* Header Section */}
         <div className="flex flex-col sm:flex-row justify-between items-center">
-          <h1 className="text-2xl font-bold mb-2 sm:mb-0 text-center sm:text-left">Smart JSON Formatter</h1>
+          <h1 className="text-3xl font-bold text-center sm:text-left text-gray-800 dark:text-gray-100 mb-4 sm:mb-0">Smart JSON Formatter</h1>
           <button
             className="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition"
             onClick={() => setDarkMode(!darkMode)}
@@ -63,36 +62,42 @@ export default function Home() {
           </button>
         </div>
 
-        {/* Input Area with Enhanced Border and Visible Line Numbers */}
-        <div className="border-2 border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden">
-          <CodeMirror
-            style={{ height: "384px" }}
-            value={input}
-            options={{
-              mode: "application/json",
-              theme: "material",
-              lineNumbers: true,
-              viewportMargin: Infinity
-            }}
-            onChange={(editor, data, value) => {
-              setInput(value);
-            }}
-          />
+        {/* JSON Input Section */}
+        <div className="space-y-2">
+          <label className="font-semibold text-gray-700 dark:text-gray-200">JSON Input</label>
+          <div className="border-2 border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden">
+            <CodeMirror
+              style={{ height: "384px" }}
+              value={input}
+              options={{
+                mode: "application/json",
+                theme: "material",
+                lineNumbers: true,
+                viewportMargin: Infinity
+              }}
+              onChange={(editor, data, value) => {
+                setInput(value);
+              }}
+            />
+          </div>
+          {errorLine && (
+            <p className="text-red-600 text-sm">Syntax error near line {errorLine}</p>
+          )}
         </div>
-        {errorLine && (
-          <p className="text-red-600 mt-2">Syntax error near line {errorLine}</p>
-        )}
 
         {/* Format Button */}
-        <button
-          className="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
-          onClick={formatJSON}
-        >
-          Format JSON
-        </button>
+        <div className="flex justify-end">
+          <button
+            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
+            onClick={formatJSON}
+          >
+            Format JSON
+          </button>
+        </div>
 
-        {/* Output Area with Modern Styling */}
-        <div>
+        {/* Output Section */}
+        <div className="space-y-2">
+          <label className="font-semibold text-gray-700 dark:text-gray-200">Formatted Output</label>
           <textarea
             className="w-full h-64 border border-gray-300 dark:border-gray-600 rounded-lg p-4 bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none resize-y font-mono"
             placeholder="Formatted JSON will appear here..."
