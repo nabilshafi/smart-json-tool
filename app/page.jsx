@@ -5,7 +5,9 @@ import dynamic from "next/dynamic";
 const CodeMirror = dynamic(() => import("@uiw/react-codemirror"), { ssr: false });
 
 export default function Home() {
-  const [input, setInput] = useState("");
+  // Pre-fill with 10 blank lines
+  const defaultEmptyLines = "\n\n\n\n\n\n\n\n\n";
+  const [input, setInput] = useState(defaultEmptyLines);
   const [output, setOutput] = useState("");
   const [errorLine, setErrorLine] = useState(null);
   const [darkMode, setDarkMode] = useState(false);
