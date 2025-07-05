@@ -49,11 +49,11 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex items-center justify-center p-4">
-      <div className="w-full max-w-3xl bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg space-y-6">
+      <div className="w-full max-w-3xl bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg space-y-6">
 
-        {/* Header Section */}
-        <div className="flex flex-col sm:flex-row justify-between items-center">
-          <h1 className="text-3xl font-bold text-center sm:text-left text-gray-800 dark:text-gray-100 mb-4 sm:mb-0">Smart JSON Formatter</h1>
+        {/* Header */}
+        <div className="flex justify-between items-center">
+          <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">Smart JSON Formatter</h1>
           <button
             className="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition"
             onClick={() => setDarkMode(!darkMode)}
@@ -62,10 +62,10 @@ export default function Home() {
           </button>
         </div>
 
-        {/* JSON Input Section */}
+        {/* Input Area */}
         <div className="space-y-2">
-          <label className="font-semibold text-gray-700 dark:text-gray-200">JSON Input</label>
-          <div className="border-2 border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden">
+          <label className="text-gray-700 dark:text-gray-200 font-medium">JSON Input</label>
+          <div className="border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 shadow-inner overflow-hidden">
             <CodeMirror
               style={{ height: "384px" }}
               value={input}
@@ -88,18 +88,18 @@ export default function Home() {
         {/* Format Button */}
         <div className="flex justify-end">
           <button
-            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
+            className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
             onClick={formatJSON}
           >
             Format JSON
           </button>
         </div>
 
-        {/* Output Section */}
+        {/* Output Area */}
         <div className="space-y-2">
-          <label className="font-semibold text-gray-700 dark:text-gray-200">Formatted Output</label>
+          <label className="text-gray-700 dark:text-gray-200 font-medium">Formatted Output</label>
           <textarea
-            className="w-full h-64 border border-gray-300 dark:border-gray-600 rounded-lg p-4 bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none resize-y font-mono"
+            className="w-full h-64 border border-gray-300 dark:border-gray-600 rounded-lg p-4 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:outline-none resize-y font-mono shadow-inner"
             placeholder="Formatted JSON will appear here..."
             value={output}
             readOnly
