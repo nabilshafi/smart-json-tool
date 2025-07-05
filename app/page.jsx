@@ -1,10 +1,6 @@
 'use client';
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import { json } from '@codemirror/lang-json';
-import { EditorView } from '@codemirror/view';
-import { basicSetup } from 'codemirror';
-import { EditorState } from '@codemirror/state';
 
 const CodeMirror = dynamic(() => import("@uiw/react-codemirror"), { ssr: false });
 
@@ -16,6 +12,7 @@ export default function Home() {
 
   useEffect(() => {
     import("codemirror/lib/codemirror.css");
+    import("codemirror/mode/javascript/javascript");
     import("codemirror/theme/material.css");
 
     if (darkMode) {
@@ -64,18 +61,20 @@ export default function Home() {
           </button>
         </div>
 
-        {/* Input Area with Line Numbers */}
+        {/* Input Area with Enhanced Border and Visible Line Numbers */}
         <div className="border-2 border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden">
           <CodeMirror
+            style={{ height: "384px" }}
             value={input}
-            height="384px"
-            extensions={[
-              basicSetup,
-              json(),
-              EditorView.lineWrapping,
-            ]}
-            theme="material"
-            onChange={(value) => setInput(value)}
+            options={{
+              mode: "application/json",
+              theme: "material",
+              lineNumbers: true,
+              viewportMargin: Infinity
+            }}
+            onChange={(editor, data, value) => {
+              setInput(value);
+            }}
           />
         </div>
         {errorLine && (
@@ -90,7 +89,7 @@ export default function Home() {
           Format JSON
         </button>
 
-        {/* Output Area */}
+        {/* Output Area with Enhanced Styling */}
         <div>
           <textarea
             className="w-full h-64 border-2 border-gray-300 dark:border-gray-600 rounded-lg p-4 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
