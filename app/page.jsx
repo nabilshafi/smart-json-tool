@@ -48,26 +48,28 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex items-center justify-center p-4">
-      <div className="w-full max-w-3xl bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg space-y-6">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex flex-col items-center justify-center p-4 space-y-6">
+      
+      {/* Header */}
+      <div className="flex justify-between items-center w-full max-w-6xl">
+        <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">Smart JSON Formatter</h1>
+        <button
+          className="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition"
+          onClick={() => setDarkMode(!darkMode)}
+        >
+          {darkMode ? 'Light Mode' : 'Dark Mode'}
+        </button>
+      </div>
 
-        {/* Header */}
-        <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">Smart JSON Formatter</h1>
-          <button
-            className="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition"
-            onClick={() => setDarkMode(!darkMode)}
-          >
-            {darkMode ? 'Light Mode' : 'Dark Mode'}
-          </button>
-        </div>
-
-        {/* JSON Input Area */}
-        <div className="space-y-2">
+      {/* Side by Side Layout */}
+      <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6 w-full max-w-6xl">
+        
+        {/* Input Area */}
+        <div className="flex-1 space-y-2">
           <label className="text-gray-700 dark:text-gray-200 font-medium">JSON Input</label>
-          <div className="border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 shadow-inner overflow-hidden">
+          <div className="border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 shadow-inner overflow-hidden h-[500px]">
             <CodeMirror
-              style={{ height: "384px" }}
+              style={{ height: "100%" }}
               value={input}
               options={{
                 mode: "application/json",
@@ -85,8 +87,8 @@ export default function Home() {
           )}
         </div>
 
-        {/* Format Button */}
-        <div className="flex justify-end">
+        {/* Center Button */}
+        <div className="flex flex-col items-center justify-center">
           <button
             className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
             onClick={formatJSON}
@@ -95,17 +97,16 @@ export default function Home() {
           </button>
         </div>
 
-      {/* Output Area with Proper Size */}
-      <div className="space-y-2 mt-4">
-        <label className="text-gray-700 dark:text-gray-200 font-medium">Formatted Output</label>
-        <textarea
-          className="w-full h-[384px] border border-gray-300 dark:border-gray-600 rounded-lg p-4 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:outline-none resize-none font-mono shadow-inner"
-          placeholder="Formatted JSON will appear here..."
-          value={output}
-          readOnly
-        />
-      </div>
-
+        {/* Output Area */}
+        <div className="flex-1 space-y-2">
+          <label className="text-gray-700 dark:text-gray-200 font-medium">Formatted Output</label>
+          <textarea
+            className="w-full h-[500px] border border-gray-300 dark:border-gray-600 rounded-lg p-4 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:outline-none resize-none font-mono shadow-inner"
+            placeholder="Formatted JSON will appear here..."
+            value={output}
+            readOnly
+          />
+        </div>
       </div>
     </div>
   );
