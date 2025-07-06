@@ -62,7 +62,7 @@ export default function Home() {
           </button>
         </div>
 
-        {/* Input Area */}
+        {/* JSON Input Area */}
         <div className="space-y-2">
           <label className="text-gray-700 dark:text-gray-200 font-medium">JSON Input</label>
           <div className="border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 shadow-inner overflow-hidden">
@@ -95,11 +95,11 @@ export default function Home() {
           </button>
         </div>
 
-        {/* Output Area */}
+        {/* Output Area with Matching Height */}
         <div className="space-y-2">
           <label className="text-gray-700 dark:text-gray-200 font-medium">Formatted Output</label>
           <textarea
-            className="w-full h-64 border border-gray-300 dark:border-gray-600 rounded-lg p-4 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:outline-none resize-y font-mono shadow-inner"
+            className="w-full h-[384px] border border-gray-300 dark:border-gray-600 rounded-lg p-4 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:outline-none resize-none font-mono shadow-inner"
             placeholder="Formatted JSON will appear here..."
             value={output}
             readOnly
