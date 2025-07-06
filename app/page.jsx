@@ -95,16 +95,17 @@ export default function Home() {
           </button>
         </div>
 
-        {/* Output Area with Matching Height */}
-        <div className="space-y-2">
-          <label className="text-gray-700 dark:text-gray-200 font-medium">Formatted Output</label>
-          <textarea
-            className="w-full h-[384px] border border-gray-300 dark:border-gray-600 rounded-lg p-4 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:outline-none resize-none font-mono shadow-inner"
-            placeholder="Formatted JSON will appear here..."
-            value={output}
-            readOnly
-          />
-        </div>
+      {/* Output Area with Enhanced Size and Styling */}
+      <div className="space-y-2">
+        <label className="text-gray-700 dark:text-gray-200 font-medium">Formatted Output</label>
+        <textarea
+          className="w-full h-[500px] sm:h-[600px] border-2 border-gray-300 dark:border-gray-600 rounded-xl p-6 bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none resize-y font-mono shadow-lg"
+          placeholder="Formatted JSON will appear here..."
+          value={output}
+          readOnly
+        />
+      </div>
+
       </div>
     </div>
   );
